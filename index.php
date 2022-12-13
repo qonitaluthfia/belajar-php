@@ -1,34 +1,5 @@
 <?php
-//membuat koneksi// 
-$con = mysqli_connect("localhost","root","","fakultas"); 
-
-//cek koneksi dengan MySQL//
-if(mysqli_connect_errno()){
-    echo "Koneksi gagal". mysqli_connect_error();
-}else{
-    echo "Koneksi berhasil";
-}
-
-//membaca data dari tabel mysql//
-$query = "SELECT * FROM mahasiswa";
-
-//tampilkan data dengan menjalankan mysql query//
-$result = mysqli_query($con,$query);
-$mahasiswa = [];
-if ($result){
-    //tampilkan data satu per satu
-    while($row = mysqli_fetch_assoc($result)){
-        $mahasiswa [] = $row;
-    }
-    mysqli_free_result($result);
-}
-
-// tutup koneksi mysql
-mysqli_close($con);
-foreach($mahasiswa as $value){
-    echo $value["nama"];
-}
-
+    include 'database.php'
 ?>
 
 <!DOCTYPE html>
@@ -37,27 +8,36 @@ foreach($mahasiswa as $value){
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Data Mahasiswa</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <title>Data Kos Lancar Jaya</title>
 </head>
 <body>
-    <h1> Data Mahasiswa </h1>
-    <?php var_dump($mahasiswa); ?>
-    <table border="1" style="width:100%;">
+    <div class="container">
+    <table class="table table-striped table-hover mt-5">
+    <thead class= table-dark>
+        <th> Nama Lengkap </th>
+        <th> Id Kos </th>
+        <th> Pekerjaan </th>
+        <th> Nomor HP </th>
+        <th> Nomor Darurat </th>
+    </thead>
+    <tbody>
         <tr>
-            <th>NIM</th>
-            <th>Nama</th>
+            <td> Afifah Fitri </td> 
+            <td> 1234567890 </td> 
+            <td> Mahasiswa </td>
+            <td> 081569439014 </td> 
+            <td> 085794616032 </td>
         </tr>
-        <?php foreach($mahasiswa as $value): ?>
         <tr>
-            <th><?php echo $value["nim"]; ?></th>
-            <th><?php echo $value["nama"]; ?></th>
+            <td> Dhiya Indah </td> 
+            <td> 1239547035 </td> 
+            <td> Sales </td>
+            <td> 081335906754 </td> 
+            <td> 089579260172 </td>
         </tr>
-        <?php endforeach; ?>
+    </tbody>    
     </table>
+    </div>
 </body>
 </html>
-
-
-
-
-
