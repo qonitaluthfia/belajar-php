@@ -1,0 +1,43 @@
+*{
+    text-decoration: none;
+    margin: 0px;
+    padding: 0px;
+    
+    }
+    body {
+        margin:0px;
+        padding:0px;
+        font-family: "Open Sans", sans-serif;
+    }
+    .wrapper {
+        width: 1100px;
+        margin: auto;
+        position: relative;
+    }
+    .logo a {
+        font-size: 60px;
+        font-weight: 800;
+        float: left;
+        font-family: "Open Sans";
+        color: #06283D;
+        text-align: justify;
+        
+    }
+
+    nav {
+        width: 100%;
+        margin: auto;
+        display: flex;
+        line-height: 80px;
+        position: sticky;
+        position: -webkit-sticky;
+        top: 0;
+        background: #A7D2CB;
+        z-index: 1;
+        border-bottom: 1px solid #06283D ;
+    }
+
+    .center {
+        margin-left: auto;
+        margin-right: auto;
+      }

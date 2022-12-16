@@ -35,23 +35,30 @@ mysqli_close($con);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <link rel="stylesheet" href="layout.css">
     <title>Data Kos Lancar Jaya</title>
 </head>
 <body>
-    <h1> Data Kos Lancar Jaya </h1>
-    <a href="insert.php">Tambah Data</a>
+<nav>
+        <div class="wrapper">
+        <div class="logo"><img src="logohome.png" width= "50" height= "50" ><font size="6"><b> Kos Jaya Abadi </a></div></font></b>
+    </div>
+</nav>
+    <br>
+    <a href="insert.php" class="btn btn-outline-primary" >Tambah Data</a>
     <table border=1 style="width: 100%;">
 
     <?php var_dump($kos); ?>
 
     <div class="container">
-    <table class="table table-striped table-hover mt-5" border="1" style="width:100%;">
+    <table class="table table-striped table-hover mt-5 table-bordered center" style="width:100%;">
     <tr>
         <th> Nama Lengkap </th>
         <th> Id Kos </th>
         <th> Pekerjaan </th>
         <th> Nomor HP </th>
         <th> Nomor Darurat </th>
+        <th> Aksi </th>
     </tr>
         <?php foreach($kos as $row): ?>
         <tr>
@@ -60,11 +67,8 @@ mysqli_close($con);
             <td><?= $row["Pekerjaan"]; ?></th>
             <td><?= $row["Nomor_HP"]; ?></th>
             <td><?= $row["Nomor_Darurat"]; ?></th>
+            <td>  <a href="update.php" class="btn btn-outline-success" >Edit</a> | <a href="delete.php" class="btn btn-outline-danger" >Delete</a> </th>
         </tr>
-        <td>
-            <a href="update.php?id=<?= $row['id'] ?>" >Edit</a> | 
-            <a href="delete.php?id=<?= $row['id'] ?>" >Delete</a>
-        </td>
         <?php endforeach; ?>
     </thead>
         
