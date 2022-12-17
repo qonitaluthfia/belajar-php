@@ -1,30 +1,32 @@
 <?php
     if (isset($_POST['submit'])){
-        //var_dump($_POST);
-        $Nama_Lengkap = $_POST['Nama_Lengkap'];
-        $Id_Kos = $_POST['Id_Kos'];
-        $Pekerjaan = $_POST['Pekerjaan'];
-        $Nomor_HP = $_POST['Nomor_HP'];
-        $Nomor_Darurat = $_POST['Nomor_Darurat'];
+        $nim = $_POST['nim'];
+        $nama = $_POST['nama'];
+        $id_jurusan = $_POST['id_jurusan'];
+        $tpt_lahir = $_POST['tpt_lahir'];
+        $tgl_lahir = $_POST['tgl_lahir'];
+        $gender = $_POST['gender'];
+        $alamat = $_POST['alamat'];
 
         // Buat koneksi dengan MySQL
-        $con = mysqli_connect("localhost","root","","kos");
+        $con = mysqli_connect("localhost","root","","fakultas");
 
-        // Check connection
+        // Cek koneksi
         if (mysqli_connect_errno()) {
-            echo "Failed to connect to MySQL: " . mysqli_connect_error();
-            exit();
+            echo "Koneksi gagal: " . mysqli_connect_error();
         }else{
             echo 'koneksi berhasil';
         }
+        // buat sql quert untuk insert ke database
+        // Buat query insert dan jalankan
+        $sql = "insert into mahasiswa (id_jurusan, nim, nama, jenis_kelamin, tempat_lahir, tanggal_lahir, alamat)
+                values ($id_jurusan,'$nim', '$nama', '$gender', '$tpt_lahir', '$tgl_lahir', '$alamat')";
 
-        $sql = "insert into kos (Id_Kos, Nama_Lengkap, Pekerjaan, Nomor_HP, Nomor_Darurat)
-        values ($Id_Kos,'$Nama_Lengkap', '$Pekerjaan', '$Nomor_HP', '$Nomor_Darurat')";
-
+        // jalankan query
         if (mysqli_query($con, $sql)) {
-            echo "New Record created successfully";
+            echo "Data berhasil ditambah";
         } else {
-            echo "Error: " . $sql . "<br>" . mysqli_error($con);
+            echo "Ada error " . mysqli_error();
         }
           
         mysqli_close($con);
@@ -37,19 +39,18 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tambah Data Kos</title>
+    <title>Tambah Data Mahasiswa</title>
 </head>
 <body>
-
-    <h1>Tambah Data</h1>
-
-    <form action="" method="post">
-        Nama Lengkap: <input type="text" name="Nama_Lengkap"><br>
-        Id Kos: <input type="number" name="Id_Kos"><br>
-        Pekerjaan: <input type="text" name="Pekerjaan"><br>
-        Nomor HP: <input type="number" name="Nomor_HP"><br>
-        Nomor Darurat: <input type="number" name="Nomor_Darurat"><br>
-        
+<h1>Tambah Data</h1>
+    <form action="insert.php" method="post">
+        NIM: <input type="text" name="nim"><br>
+        Nama: <input type="text" name="nama"><br>
+        ID Jurusan: <input type="number" name="id_jurusan"><br>
+        Jenis Kelamin: <input type="text" name="gender"><br>
+        Tempat Lahir: <input type="text" name="tpt_lahir"><br>
+        Tanggal Lahir (yyyy-mm-dd): <input type="text" name="tgl_lahir"><br>
+        Alamat: <input type="text" name="alamat"><br>
         <button type="submit" name="submit">Tambah Data</button>
     </form>
 </body>

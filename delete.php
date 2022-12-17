@@ -1,29 +1,27 @@
-<?php 
-
+<?php
+// tangkap data dari form submit
 if(isset($_GET['id'])){
-    // ambil id dari get
     $id = $_GET['id'];
 
     // Buat koneksi dengan MySQL
-    $con = mysqli_connect("localhost","root","","kos");
+    $con = mysqli_connect("localhost","root","","fakultas");
 
-    // Check connection
+    // Cek koneksi
     if (mysqli_connect_errno()) {
-        echo "Failed to connect to MySQL: " . mysqli_connect_error();
-        exit();
+        echo "Koneksi  gagal " . mysqli_connect_error();
     }else{
         echo 'koneksi berhasil';
     }
-
-    $sql = "DELETE FROM kos WHERE id='$id' ";
+    // buat sql quert untuk insert ke database
+    // Buat query insert dan jalankan
+    $sql = "DELETE FROM mahasiswa WHERE id='$id' ";
 
     if (mysqli_query($con, $sql)) {
-        echo "Delete data berhasil";
+        echo "Data berhasil dihapus";
     } else {
-        echo "Error: " . $sql . "<br>" . mysqli_error($con);
+        echo "Ada Error". mysqli_error($con);
     }
       
     mysqli_close($con);
 }
-
 ?>

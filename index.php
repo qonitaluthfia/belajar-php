@@ -1,30 +1,29 @@
 <?php
+//1. Buat koneksi dengan MySQL
+$con= mysqli_connect("localhost","root","","fakultas");
 
-// 1. Buat koneksi dengan MySQL
-$con = mysqli_connect("localhost","root","","kos");
-
-// 2. Check connection
-if (mysqli_connect_errno()) {
-    echo "Failed to connect to MySQL: " . mysqli_connect_error();
-    exit();
+// 2. Cek koneksi dengan MySQL
+if(mysqli_connect_errno()){
+    echo "Koneksi gagal". mysqli_connect_error();
 }else{
-    echo 'koneksi berhasil';
+    echo "Koneksi berhasil";
 }
 
-// 3 buat query baca semua data dari table
-$sql = "SELECT * FROM kos";
+// 3. Membaca data dari table mysql
+$query = "SELECT * FROM mahasiswa";
 
-// 4. tampilkan data, cek apakah query bisa dijalankan
-$kos = [];
-if ($result = mysqli_query($con, $sql)) {
-    // tampilkan satu per satu
-    while ($row = mysqli_fetch_assoc($result)) {
-        $kos[] = $row;
+// 4. Tampilkan data, dengan menjalankan sql query
+$result = mysqli_query($con,$query);
+$mahasiswa = [];
+if ($result){
+    //tampilkan data satu per satu
+    while($row = mysqli_fetch_assoc($result)){
+        $mahasiswa [] = $row;
     }
     mysqli_free_result($result);
-  }
+}
 
-// 5. tutup koneksi
+// 5. tutup koneksi mysql
 mysqli_close($con);
 ?>
 
@@ -32,47 +31,46 @@ mysqli_close($con);
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     <link rel="stylesheet" href="layout.css">
-    <title>Data Kos Lancar Jaya</title>
+    <title>Data Mahasiswa Berprestasi</title>
 </head>
 <body>
 <nav>
         <div class="wrapper">
-        <div class="logo"><img src="logohome.png" width= "50" height= "50" ><font size="6"><b> Kos Jaya Abadi </a></div></font></b>
-    </div>
+        <div class="logo"><img src="university.png" width= "100" height= "100" ><font size="6"><b> Universitas Bunda Qonita </a></div></font></b>
+        </div>
 </nav>
     <br>
-    <a href="insert.php" class="btn btn-outline-primary" >Tambah Data</a>
     <table border=1 style="width: 100%;">
 
-    <?php var_dump($kos); ?>
 
     <div class="container">
-    <table class="table table-striped table-hover mt-5 table-bordered center" style="width:100%;">
-    <tr>
-        <th> Nama Lengkap </th>
-        <th> Id Kos </th>
-        <th> Pekerjaan </th>
-        <th> Nomor HP </th>
-        <th> Nomor Darurat </th>
-        <th> Aksi </th>
-    </tr>
-        <?php foreach($kos as $row): ?>
+    <h1>Data Mahasiswa Berprestasi</h1>
+    <a href="insert.php" class="btn btn-outline-primary">Tambah Data</a>
+    <table class="table table-striped table-hover mt-5 table-bordered center" style="width:100%;" border="1" style="width 100%">
         <tr>
-            <td><?= $row["Nama_Lengkap"]; ?></th>
-            <td><?= $row["Id_Kos"]; ?></th>
-            <td><?= $row["Pekerjaan"]; ?></th>
-            <td><?= $row["Nomor_HP"]; ?></th>
-            <td><?= $row["Nomor_Darurat"]; ?></th>
-            <td>  <a href="update.php" class="btn btn-outline-success" >Edit</a> | <a href="delete.php" class="btn btn-outline-danger" >Delete</a> </th>
+            <th>NIM</th>
+            <th>Nama</th>
+            <th>Tempat Lahir</th>
+            <th>Tanggal Lahir</th>
+            <th>Alamat</th>
+            <th>Aksi</th>
+        </tr>
+        <?php foreach ($mahasiswa as $value): {}?>
+        <tr>
+            <td><?php echo $value["nim"]; ?></td>
+            <td><?php echo $value["nama"]; ?> </td>
+            <td><?php echo $value["tempat_lahir"]; ?></td>
+            <td><?php echo $value["tanggal_lahir"]; ?> </td>
+            <td><?php echo $value["alamat"]; ?> </td>
+            <td>
+                <a href="<?php echo "update.php?id=".$value["id"]; ?>" button type="button" class="btn btn-outline-success" >Edit</a>
+                <a href="<?php echo "delete.php?id=".$value["id"]; ?>" button type="button" class="btn btn-outline-danger" >Delete</a>
         </tr>
         <?php endforeach; ?>
-    </thead>
-        
     </table>
-    </div>
 </body>
 </html>
