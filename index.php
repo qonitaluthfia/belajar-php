@@ -4,9 +4,9 @@ $con= mysqli_connect("localhost","root","","fakultas");
 
 // 2. Cek koneksi dengan MySQL
 if(mysqli_connect_errno()){
-    echo "Koneksi gagal". mysqli_connect_error();
+     "Koneksi gagal". mysqli_connect_error();
 }else{
-    echo "Koneksi berhasil";
+     "Koneksi berhasil";
 }
 
 // 3. Membaca data dari table mysql

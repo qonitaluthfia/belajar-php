@@ -13,9 +13,9 @@
 
         // Cek koneksi
         if (mysqli_connect_errno()) {
-            echo "Koneksi gagal: " . mysqli_connect_error();
+             "Koneksi gagal: " . mysqli_connect_error();
         }else{
-            echo 'koneksi berhasil';
+             'koneksi berhasil';
         }
         // buat sql quert untuk insert ke database
         // Buat query insert dan jalankan
